@@ -56,6 +56,15 @@ public class Neuron {
     }
 
     /**
+     * Removes a neuron, `n`, from field `next`.
+     * @param n neuron to remove
+     */
+    public void ltd(Neuron n) {
+        next.remove(n);
+        assertInv();
+    }
+
+    /**
      * Removes all neurons from the field `next`.
      */
     public void ltdAll() {
