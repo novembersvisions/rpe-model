@@ -11,8 +11,7 @@ public class Neuron {
      * Invariant: `type` must either be "excite" or "inhibit" */
     String type;
 
-    /** Stores the membrane potential of a neuron in mV. Initialized at -70.0.
-     * Invariant: `type` must either be "excite" or "inhibit" */
+    /** Stores the membrane potential of a neuron in mV. Initialized at -70.0. */
     double potential;
 
 }
