@@ -1,12 +1,13 @@
+package rpe;
 import java.util.ArrayList;
 import java.util.List;
 
+/** A network of neurons, implemented as a linked list. 
+ * Invariant: no neuron in the network can be null */
 public class Network<Neuron> {
 
-    /** Invariant: no neuron in the network can be null */
-
     /** The first element of linked neurons in the network.
-     * Invariant: no neuron can point to `head` in its `next` field */
+     * Invariant: no neuron can point to `first` in its `next` field */
     Neuron first;
 
     /** The last element of linked neurons in the network.
