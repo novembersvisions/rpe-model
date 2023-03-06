@@ -16,12 +16,12 @@ public class Network<Neuron> {
     /** Number of neurons in the network.
      * Invariant: equals the number of unique neurons starting at null
      */
-    int size;
+    public int size;
 
     /** List of unique neurons in the network.
      * Invariant: each element must be unique; each element in the list must equal
      * a corresponding element in the network, and vice versa.
      */
-    List<Neuron> unique = new ArrayList<Neuron>();
+    public List<Neuron> unique = new ArrayList<Neuron>();
 
 }
