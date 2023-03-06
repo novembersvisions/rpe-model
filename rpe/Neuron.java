@@ -6,7 +6,7 @@ import java.util.List;
 public class Neuron {
 
     /** A list of neurons this neuron is connected to.
-     * Invariant: a neuron cannot be connected to itself */
+     * Invariant: a neuron cannot be connected to itself; neurons in the list must be unique */
     public List<Neuron> next = new ArrayList<Neuron>();
 
     /** Stores whether the neuron is excitatory or inhibitory.
@@ -16,7 +16,8 @@ public class Neuron {
     /** Stores the membrane potential of a neuron in mV. Initialized at -70.0. */
     private double potential;
 
-    /** Asserts class invariants. */
+    /** Asserts class invariants.
+     * TODO: assert that neurons are unique in `next` */
     private void assertInv() {
         int i = 0;
         if (next != null) {

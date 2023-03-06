@@ -1,124 +1,69 @@
 package rpe;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+/** Implements a Bag ADT. Serves as a non-ordered list for the `next` field of Neuron. */
+public class Connections<T> {
 
-public class Connections<T> implements List<T> {
+    /** List of items in the bag. Indices 0 to size-1 must be non-null.
+     * Indices size to items.length-1 must be null. */
+    private T[] items;
 
-    @Override
-    public int size() {
+    /** Number of items in the bag */
+    private int size;
+
+    /** Asserts class invariant. */
+    private void assertInv() {
+        for (int i=0; i < size; i++) {
+            assert items[i] != null;
+        }
+        for (int i=size; i < items.length; i++) {
+            assert items[i] == null;
+        }
+    }
+
+    /** Constructs an instance of Connections. */
+    public Connections() {
+        final int capacity = 10;
+        items = (T[]) new Object[capacity];
+    }
+
+    /**
+     * Add `newItem` to this bag. Requires `newItem` is not null.
+     */
+    void add(T newItem) {
+    }
+
+    /**
+     * Removes `item` from this bag. Requires `item` is not null.
+     */
+    void remove(T item) {
+    }
+
+    /**
+     * Removes all items from the bag.
+     */
+    void removeAll() {
+    }
+
+    /**
+     * The number of items in the bag.
+     */
+    int size() {
         return 0;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return false;
-    }
-
-    @Override
-    public Iterator<T> iterator() {
-        return null;
-    }
-
-    @Override
-    public Object[] toArray() {
-        return new Object[0];
-    }
-
-    @Override
-    public <T1> T1[] toArray(T1[] a) {
-        return null;
-    }
-
-    @Override
-    public boolean add(T t) {
-        return false;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends T> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends T> c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public void clear() {
-
-    }
-
-    @Override
-    public T get(int index) {
-        return null;
-    }
-
-    @Override
-    public T set(int index, T element) {
-        return null;
-    }
-
-    @Override
-    public void add(int index, T element) {
-
-    }
-
-    @Override
-    public T remove(int index) {
-        return null;
-    }
-
-    @Override
-    public int indexOf(Object o) {
+    /**
+     * The number of copies of `item` this bag contains.
+     */
+    int frequencyOf(T item) {
         return 0;
     }
 
-    @Override
-    public int lastIndexOf(Object o) {
-        return 0;
-    }
-
-    @Override
-    public ListIterator<T> listIterator() {
+    /**
+     * Return an array containing all the items in the bag.
+     * Items are not ordered in any particular way.
+     */
+    T[] toArray() {
         return null;
     }
 
-    @Override
-    public ListIterator<T> listIterator(int index) {
-        return null;
-    }
-
-    @Override
-    public List<T> subList(int fromIndex, int toIndex) {
-        return null;
-    }
 }
