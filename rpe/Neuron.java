@@ -16,8 +16,7 @@ public class Neuron {
     /** Stores the membrane potential of a neuron in mV. Initialized at -70.0. */
     private double potential;
 
-    /** Asserts class invariants.
-     * TODO: assert that neurons are unique in `next` */
+    /** Asserts class invariants.*/
     private void assertInv() {
         int i = 0;
         if (next != null) {

@@ -27,15 +27,24 @@ public class Connections<T> {
     }
 
     /**
-     * Add `newItem` to this bag. Requires `newItem` is not null.
+     * Add `newItem` to this bag. Requires `newItem` is not null
+     * and `newItem` is not already in the bag.
      */
     void add(T newItem) {
+        assert newItem != null;
+        if (items.length == size) {
+            //TODO: make new array
+        }
+        size++;
+        assertInv();
     }
 
     /**
      * Removes `item` from this bag. Requires `item` is not null.
      */
     void remove(T item) {
+        size--;
+        assertInv();
     }
 
     /**
@@ -48,14 +57,14 @@ public class Connections<T> {
      * The number of items in the bag.
      */
     int size() {
-        return 0;
+        return size;
     }
 
     /**
-     * The number of copies of `item` this bag contains.
+     * Checks if the bag contains `item`.
      */
-    int frequencyOf(T item) {
-        return 0;
+    boolean contains(T item) {
+        return false;
     }
 
     /**
