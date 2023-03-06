@@ -1,11 +1,11 @@
 package rpe;
 
 /** Implements a Bag ADT. Serves as a non-ordered list for the `next` field of Neuron. */
-public class Connections<T> {
+public class Connections {
 
     /** List of items in the bag. Indices 0 to size-1 must be non-null.
      * Indices size to items.length-1 must be null. */
-    private T[] items;
+    private Neuron[] items;
 
     /** Number of items in the bag */
     private int size;
@@ -22,16 +22,15 @@ public class Connections<T> {
 
     /** Constructs an instance of Connections. */
     public Connections() {
-        final int capacity = 10;
-        items = (T[]) new Object[capacity];
+        items = new Neuron[10];
     }
 
     /**
-     * Add `newItem` to this bag. Requires `newItem` is not null
-     * and `newItem` is not already in the bag.
+     * Add `newNeuron` to this bag. Requires `newNeuron` is not null
+     * and `newNeuron` is not already in the bag.
      */
-    void add(T newItem) {
-        assert newItem != null;
+    void add(Neuron newNeuron) {
+        assert newNeuron != null;
         if (items.length == size) {
             //TODO: make new array
         }
@@ -40,9 +39,9 @@ public class Connections<T> {
     }
 
     /**
-     * Removes `item` from this bag. Requires `item` is not null.
+     * Removes `neuron` from this bag. Requires `neuron` is not null.
      */
-    void remove(T item) {
+    void remove(Neuron neuron) {
         size--;
         assertInv();
     }
@@ -61,9 +60,9 @@ public class Connections<T> {
     }
 
     /**
-     * Checks if the bag contains `item`.
+     * Checks if the bag contains `neuron`.
      */
-    boolean contains(T item) {
+    boolean contains(Neuron neuron) {
         return false;
     }
 
@@ -71,8 +70,8 @@ public class Connections<T> {
      * Return an array containing all the items in the bag.
      * Items are not ordered in any particular way.
      */
-    T[] toArray() {
-        return null;
+    Neuron[] toArray() {
+        return items;
     }
 
 }

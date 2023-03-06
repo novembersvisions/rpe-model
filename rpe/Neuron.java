@@ -32,7 +32,7 @@ public class Neuron {
      @param type specifies the type of neuron; must be "excite" or "inhibit"
      @param next list of neurons this object is connected to
      */
-    Neuron(String type, List<Neuron> next) {
+    public Neuron(String type, List<Neuron> next) {
         this.type = type;
         this.next = next;
         potential = 70.0;
