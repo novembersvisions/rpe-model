@@ -33,7 +33,7 @@ public class Neuron {
     public Neuron(String type, Connections next) {
         this.type = type;
         this.next = next;
-        potential = 70.0;
+        potential = -70.0;
         assertInv();
     }
 
@@ -61,13 +61,33 @@ public class Neuron {
 
     /** Allows the neuron to fire, returning true if the membrane potential has reached the threshold.
      * If the neuron is excitatory, it depolarizes the connected neurons in `next`,
-     * setting membrane potential accordingly.
+     * propagating the action potential.
      * If the neuron is inhibitory, it repolarizes the membrane potential of connected neurons. */
     public boolean fire() {
+        System.out.println(this);
+        if (this == null) {
+            return false;
+        }
         if (potential < -55.0) {
+            System.out.println("Repolarized at "+potential);
             return false;
         }
         else {
+            System.out.println("Depolarized at "+potential);
+            if (type == "excite") {
+                for (int i=0;i< next.size();i++) {
+                    if (next.get(i).potential < -55.0) {
+                        next.get(i).potential = -55.0;
+                    }
+                    next.get(i).fire();
+                }
+            } else {
+                for (int i=0;i< next.size();i++) {
+                    if (next.get(i).potential >= -55.0) {
+                        next.get(i).potential = -70.0;
+                    }
+                }
+            }
             return true;
         }
     }
