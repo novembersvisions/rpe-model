@@ -88,7 +88,6 @@ public class Connections {
     void removeAll() {
         for (int i=0; i < size; i++) {
             items[i] = null;
-            i += 1;
         }
         size = 0;
         assertInv();
