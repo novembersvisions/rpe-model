@@ -104,6 +104,9 @@ public class Connections {
     boolean contains(Neuron neuron) {
         int i = 0;
         while (i < items.length) {
+            if (items[i] == null) {
+                return false;
+            }
             if (items[i].equals(neuron)) {
                 return true;
             }

@@ -8,7 +8,25 @@ import org.junit.jupiter.api.Test;
 class RPETest {
 
     /**
-     * Test constructor
+     * Test Connections class
+     */
+    @Test
+    void connectConstructor() {
+        new Connections();
+    }
+    @Test
+    void connectAdd() {
+        {
+            Connections next = new Connections();
+            Neuron n = new Neuron("excite", null);
+            next.add(n);
+            assertEquals(1, next.size());
+            System.out.println(next);
+        }
+    }
+
+    /**
+     * Test Neuron constructor
      */
     @Test
     void testConstructor() {
