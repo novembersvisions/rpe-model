@@ -68,32 +68,54 @@ public class Neuron {
         }
     }
 
-    /** Allows the neuron to fire, returning true if the membrane potential has reached the threshold.
+    /** Allows the neuron to fire, returning true for each neuron that fires
+     * if the membrane potential has reached the threshold. Prints whether the neuron is
+     * depolarized or repolarized. <br><br>
+     *
      * If the neuron is excitatory, it depolarizes the connected neurons in `next`,
-     * propagating the action potential.
+     * propagating the action potential. <br>
      * If the neuron is inhibitory, it repolarizes the membrane potential of connected neurons. */
-    public boolean fire() {
+    public Boolean[] fire() {
+        Boolean[] propagate = new Boolean[next.size()+1];
         System.out.println(this);
+
         if (potential < -55.0) {
             System.out.println("Repolarized at "+potential+" mV");
-            return false;
+            addToPropagate(propagate,false);
         }
         else {
             System.out.println("Depolarized at "+potential+" mV");
+            addToPropagate(propagate,true);
             if (type.equals("excite") && next != null) {
-                for (int i=0;i< next.size();i++) {
+                for (int i=0;i<next.size();i++) {
                     next.get(i).depolarize();
+                    System.out.println(next.get(i));
                     next.get(i).fire();
                 }
-            } if (type.equals("inhibit") && next != null) {
+            }
+            if (type.equals("inhibit") && next != null) {
                 for (int i=0;i< next.size();i++) {
                     if (next.get(i).potential >= -55.0) {
                         next.get(i).potential = -70.0;
+                        next.get(i).fire();
                     }
                 }
             }
-            return true;
         }
+        return propagate;
+    }
+
+    /**
+     * Helper method for fire(). Searches for the first empty spot in the array
+     * and adds a boolean `value` to `list`.
+     */
+    private void addToPropagate(Boolean[] list, boolean value) {
+        int pos = 0;
+        while (list[pos] != null) {
+            pos += 1;
+        }
+        list[pos] = value;
+        System.out.println(list[pos]);
     }
 
 }
