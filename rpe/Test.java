@@ -42,6 +42,29 @@ class RPETest {
         }
     }
 
+    @Test
+    void connectRemove() {
+        {
+            Connections next = new Connections();
+            Neuron n = new Neuron("excite", null);
+            Neuron i = new Neuron("excite", null);
+            next.add(n);
+            next.add(i);
+            assertEquals(true, next.remove(next.get(0)));
+            assertEquals(1, next.size());
+        }
+        {
+            Connections next = new Connections();
+            Neuron n = new Neuron("excite", null);
+            Neuron i = new Neuron("excite", null);
+            Neuron f = new Neuron("inhibit", null);
+            next.add(n);
+            next.add(i);
+            assertEquals(false, next.remove(f));
+            assertEquals(2, next.size());
+        }
+    }
+
     /**
      * Test Neuron constructor
      */

@@ -5,7 +5,7 @@ public class Connections {
 
     /** List of items in the bag. Indices 0 to size-1 must be non-null.
      * Indices size to items.length-1 must be null. */
-    public Neuron[] items;
+    private Neuron[] items;
 
     /** Number of items in the bag */
     private int size;
@@ -53,18 +53,20 @@ public class Connections {
      * If it is not in the bag, returns false.
      */
     boolean remove(Neuron neuron) {
-        if (!contains(neuron)) {
+        if (contains(neuron)) {
             int i = 0;
             while (i < size) {
                 if (items[i].equals(neuron)) {
-                    shiftLeft(i);
-                    break;
+                    items[i] = null;
+                    if (items[i+1] != null) {
+                        shiftLeft(i);
+                    }
+                    size--;
+                    assertInv();
+                    return true;
                 }
                 i += 1;
             }
-            size--;
-            assertInv();
-            return true;
         }
         return false;
     }
@@ -74,7 +76,7 @@ public class Connections {
      * Shifts all elements in items to the left, starting from `pos`.
      */
     private void shiftLeft(int pos) {
-        while (items[pos+1] != null) {
+        while (pos < items.length-1) {
             items[pos] = items[pos+1];
             pos += 1;
         }
@@ -97,6 +99,15 @@ public class Connections {
      */
     int size() {
         return size;
+    }
+
+    /**
+     * Returns the neuron at index `pos`.
+     * Requires `pos` < size.
+     */
+    Neuron get(int pos) {
+        assert pos < size;
+        return items[pos];
     }
 
     /**
