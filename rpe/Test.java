@@ -31,6 +31,15 @@ class RPETest {
             assertEquals(2, next.size());
             System.out.println(next.toString());
         }
+        {
+            Connections next = new Connections();
+            for (int i=0;i<15;i++) {
+                Neuron n = new Neuron("excite", null);
+                next.add(n);
+            }
+            System.out.println(next.toString());
+            assertEquals(15, next.size());
+        }
     }
 
     /**
