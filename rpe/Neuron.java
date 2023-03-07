@@ -1,13 +1,11 @@
 package rpe;
-import java.util.ArrayList;
-import java.util.List;
 
 /** A neuron with an excitatory/inhibitory type, membrane potential, and list of connected neurons. */
 public class Neuron {
 
     /** A list of neurons this neuron is connected to.
      * Invariant: a neuron cannot be connected to itself; neurons in the list must be unique */
-    public List<Neuron> next = new ArrayList<Neuron>();
+    private Connections next = new Connections();
 
     /** Stores whether the neuron is excitatory or inhibitory.
      * Invariant: `type` must either be "excite" or "inhibit" */
@@ -32,7 +30,7 @@ public class Neuron {
      @param type specifies the type of neuron; must be "excite" or "inhibit"
      @param next list of neurons this object is connected to
      */
-    public Neuron(String type, List<Neuron> next) {
+    public Neuron(String type, Connections next) {
         this.type = type;
         this.next = next;
         potential = 70.0;
@@ -42,7 +40,7 @@ public class Neuron {
     /**
      * Returns the list of connected neurons in `next`
      */
-    public List<Neuron> next() {
+    public Connections next() {
         return next;
     }
 

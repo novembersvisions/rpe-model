@@ -108,12 +108,13 @@ class RPETest {
     @Test
     void testConstructor() {
         Neuron n = new Neuron("excite",null);
-        ArrayList<Neuron> iList = new ArrayList<Neuron>(Arrays.asList(n));
 
+        Connections iList = new Connections();
+        iList.add(n);
         Neuron i = new Neuron("inhibit", iList);
-        System.out.println(i);
-        System.out.println(n);
-        System.out.println(i.next);
+
+        System.out.println(i.type());
+        System.out.println(i.next());
     }
 
 }
