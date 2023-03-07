@@ -2,3 +2,7 @@
 *.xml
 *.iml
 .DS_Store
+out/production/rpe/.gitattributes
+out/production/rpe/classpath.index
+out/production/rpe/rpe/Main.class
+*.class

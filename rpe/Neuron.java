@@ -47,35 +47,6 @@ public class Neuron {
     }
 
     /**
-     * Adds a new neuron, `n`, to field `next`.
-     * @param n new neuron to add
-     */
-    public void ltp(Neuron n) {
-        next.add(n);
-        assertInv();
-    }
-
-    /**
-     * Removes a neuron, `n`, from field `next`.
-     * @param n neuron to remove
-     */
-    public void ltd(Neuron n) {
-        next.remove(n);
-        assertInv();
-    }
-
-    /**
-     * Removes all neurons from the field `next`.
-     */
-    public void ltdAll() {
-        int i = 0;
-        while (i < next.size()) {
-            next.remove(next.get(i));
-        }
-        assertInv();
-    }
-
-    /**
      * Calculates membrane potential in mV using the Goldman–Hodgkin–Katz equation.
      * Modifies the value of field `potential`.
      */

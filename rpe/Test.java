@@ -2,12 +2,10 @@ package rpe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class NeuronTest {
+class RPETest {
 
     /**
      * Test constructor
@@ -22,4 +20,5 @@ class NeuronTest {
         System.out.println(n);
         System.out.println(i.next);
     }
+
 }

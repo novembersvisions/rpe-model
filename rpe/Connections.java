@@ -26,30 +26,69 @@ public class Connections {
     }
 
     /**
-     * Add `newNeuron` to this bag. Requires `newNeuron` is not null
+     * Adds `newNeuron` to this bag. Requires `newNeuron` is not null
      * and `newNeuron` is not already in the bag.
      */
     void add(Neuron newNeuron) {
-        assert newNeuron != null;
+        assert newNeuron != null && !contains(newNeuron);
         if (items.length == size) {
-            //TODO: make new array
+            expandBag();
         }
+        items[size] = newNeuron;
         size++;
         assertInv();
     }
 
+    /** Helper method for add. Expands the capacity of the bag if it is full. */
+    private void expandBag() {
+        Neuron[] newArr = new Neuron[size*2];
+        for (int i=0; i < size; i++) {
+            newArr[i] = items[i];
+        }
+    }
+
     /**
-     * Removes `neuron` from this bag. Requires `neuron` is not null.
+     * Removes `neuron` from this bag and returns true.
+     * If it is not in the bag, returns false.
      */
-    void remove(Neuron neuron) {
-        size--;
-        assertInv();
+    boolean remove(Neuron neuron) {
+        if (!contains(neuron)) {
+            int i = 0;
+            while (i < items.length) {
+                if (items[i].equals(neuron)) {
+                    shiftLeft(i);
+                    break;
+                }
+                i += 1;
+            }
+            size--;
+            assertInv();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Helper method for remove.
+     * Shifts all elements in items to the left, starting from `pos`.
+     */
+    private void shiftLeft(int pos) {
+        while (items[pos+1] != null) {
+            items[pos] = items[pos+1];
+            pos += 1;
+        }
     }
 
     /**
      * Removes all items from the bag.
      */
     void removeAll() {
+        for (int i=0; i < items.length; i++) {
+            items[i] = null;
+            i += 1;
+        }
+        size = 0;
+        assertInv();
     }
 
     /**
@@ -60,9 +99,16 @@ public class Connections {
     }
 
     /**
-     * Checks if the bag contains `neuron`.
+     * Returns true if the bag contains `neuron`.
      */
     boolean contains(Neuron neuron) {
+        int i = 0;
+        while (i < items.length) {
+            if (items[i].equals(neuron)) {
+                return true;
+            }
+            i += 1;
+        }
         return false;
     }
 
