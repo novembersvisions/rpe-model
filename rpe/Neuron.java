@@ -47,6 +47,13 @@ public class Neuron {
     }
 
     /**
+     * Returns the type of neuron
+     */
+    public String type() {
+        return type;
+    }
+
+    /**
      * Calculates membrane potential in mV using the Goldman–Hodgkin–Katz equation.
      * Modifies the value of field `potential`.
      */

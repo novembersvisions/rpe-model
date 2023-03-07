@@ -5,7 +5,7 @@ public class Connections {
 
     /** List of items in the bag. Indices 0 to size-1 must be non-null.
      * Indices size to items.length-1 must be null. */
-    private Neuron[] items;
+    public Neuron[] items;
 
     /** Number of items in the bag */
     private int size;
@@ -45,6 +45,7 @@ public class Connections {
         for (int i=0; i < size; i++) {
             newArr[i] = items[i];
         }
+        items = newArr;
     }
 
     /**
@@ -54,7 +55,7 @@ public class Connections {
     boolean remove(Neuron neuron) {
         if (!contains(neuron)) {
             int i = 0;
-            while (i < items.length) {
+            while (i < size) {
                 if (items[i].equals(neuron)) {
                     shiftLeft(i);
                     break;
@@ -83,7 +84,7 @@ public class Connections {
      * Removes all items from the bag.
      */
     void removeAll() {
-        for (int i=0; i < items.length; i++) {
+        for (int i=0; i < size; i++) {
             items[i] = null;
             i += 1;
         }
@@ -103,7 +104,7 @@ public class Connections {
      */
     boolean contains(Neuron neuron) {
         int i = 0;
-        while (i < items.length) {
+        while (i < size) {
             if (items[i] == null) {
                 return false;
             }
@@ -116,11 +117,21 @@ public class Connections {
     }
 
     /**
-     * Return an array containing all the items in the bag.
+     * Returns a string with each item in the bag, represented as their types.
      * Items are not ordered in any particular way.
      */
-    Neuron[] toArray() {
-        return items;
+    @Override
+    public String toString() {
+        int i = 0;
+        String types = "";
+        while (i < size) {
+            types += items[i].type();
+            if (i < size-1) {
+                types += ", ";
+            }
+            i += 1;
+        }
+        return types;
     }
 
 }
