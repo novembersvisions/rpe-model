@@ -5,7 +5,7 @@ public class Neuron {
 
     /** A list of neurons this neuron is connected to.
      * Invariant: a neuron cannot be connected to itself; neurons in the list must be unique */
-    private Connections next = new Connections();
+    private Connections next;
 
     /** Stores whether the neuron is excitatory or inhibitory.
      * Invariant: `type` must either be "excite" or "inhibit" */
@@ -23,7 +23,7 @@ public class Neuron {
                 i += 1;
             }
         }
-        assert type == "excite" || type == "inhibit";
+        assert type.equals("excite") || type.equals("inhibit");
     }
 
     /** Creates an instance of Neuron.
@@ -59,29 +59,33 @@ public class Neuron {
 
     }
 
+    /**
+     * If `potential` is less than -55.0 mV, it is set to -55.0, the threshold value.
+     */
+    public void depolarize() {
+        if (potential < -55.0) {
+            potential = -55.0;
+        }
+    }
+
     /** Allows the neuron to fire, returning true if the membrane potential has reached the threshold.
      * If the neuron is excitatory, it depolarizes the connected neurons in `next`,
      * propagating the action potential.
      * If the neuron is inhibitory, it repolarizes the membrane potential of connected neurons. */
     public boolean fire() {
         System.out.println(this);
-        if (this == null) {
-            return false;
-        }
         if (potential < -55.0) {
-            System.out.println("Repolarized at "+potential);
+            System.out.println("Repolarized at "+potential+" mV");
             return false;
         }
         else {
-            System.out.println("Depolarized at "+potential);
-            if (type == "excite") {
+            System.out.println("Depolarized at "+potential+" mV");
+            if (type.equals("excite") && next != null) {
                 for (int i=0;i< next.size();i++) {
-                    if (next.get(i).potential < -55.0) {
-                        next.get(i).potential = -55.0;
-                    }
+                    next.get(i).depolarize();
                     next.get(i).fire();
                 }
-            } else {
+            } if (type.equals("inhibit") && next != null) {
                 for (int i=0;i< next.size();i++) {
                     if (next.get(i).potential >= -55.0) {
                         next.get(i).potential = -70.0;
