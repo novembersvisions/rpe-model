@@ -63,6 +63,30 @@ class RPETest {
             assertEquals(false, next.remove(f));
             assertEquals(2, next.size());
         }
+        {
+            Connections next = new Connections();
+            Neuron n = new Neuron("excite", null);
+            Neuron i = new Neuron("excite", null);
+            Neuron f = new Neuron("inhibit", null);
+            next.add(n);
+            next.add(i);
+            next.add(f);
+            assertEquals(true, next.remove(i));
+            assertEquals(2, next.size());
+        }
+        {
+            Connections next = new Connections();
+            Neuron n = new Neuron("excite", null);
+            Neuron i = new Neuron("excite", null);
+            Neuron f = new Neuron("inhibit", null);
+            Neuron g = new Neuron("inhibit", null);
+            next.add(n);
+            next.add(i);
+            next.add(f);
+            next.add(g);
+            assertEquals(true, next.remove(n));
+            assertEquals(3, next.size());
+        }
     }
 
     /**
