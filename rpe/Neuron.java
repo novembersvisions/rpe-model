@@ -85,6 +85,12 @@ public class Neuron {
         if (potential < -55.0) {
             System.out.println("Repolarized at "+potential+" mV");
             propagate += "false,";
+            if (type.equals("inhibit") && next != null) {
+                // inhibition of inhibition
+                for (int i=0;i< next.size();i++) {
+                    next.get(i).fire();
+                }
+            }
         }
         else {
             System.out.println("Depolarized at "+potential+" mV");

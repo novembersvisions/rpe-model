@@ -191,6 +191,21 @@ class RPETest {
             i.depolarize();
             assertEquals("true,true,false,", i.fire());
         }
+        System.out.println("\n inhibit -> inhibit -> excite(depolarized)");
+        {
+            Connections nextNext = new Connections();
+            Neuron nN = new Neuron("excite", null);
+            nextNext.add(nN);
+            nN.depolarize();
+
+            Connections next = new Connections();
+            Neuron n = new Neuron("inhibit", nextNext);
+            next.add(n);
+
+            Neuron i = new Neuron("inhibit",next);
+            i.depolarize();
+            assertEquals("true,false,true,", i.fire());
+        }
 
     }
 
