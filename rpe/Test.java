@@ -119,26 +119,26 @@ class RPETest {
 
     @Test
     void neuronFire() {
-        // one neuron, below threshold
+        System.out.println("one neuron, below threshold");
         {
             Neuron i = new Neuron("excite",null);
             assertEquals("false", i.fire());
         }
-        // excitatory neuron, above threshold
+        System.out.println("\n excitatory neuron, above threshold");
         {
             Neuron i = new Neuron("excite",null);
             i.depolarize();
 
             assertEquals("true", i.fire());
         }
-        // inhibitory neuron, above threshold
+        System.out.println("\n inhibitory neuron, above threshold");
         {
             Neuron i = new Neuron("inhibit",null);
             i.depolarize();
 
             assertEquals("true", i.fire());
         }
-        // excitatory neurons
+        System.out.println("\n excitatory neurons");
         {
             Connections next = new Connections();
             for (int i = 0; i < 15; i++) {
@@ -149,6 +149,47 @@ class RPETest {
             i.depolarize();
             assertEquals("true,true,true,true,true,true,true,"
                     + "true,true,true,true,true,true,true,true,true,", i.fire());
+        }
+        System.out.println("\n excitatory/inhibitory neurons");
+        {
+            Connections next = new Connections();
+            for (int i = 0; i < 2; i++) {
+                Neuron n = new Neuron("excite", null);
+                Neuron k = new Neuron("inhibit", null);
+                next.add(n);
+                next.add(k);
+            }
+            Neuron i = new Neuron("excite",next);
+            i.depolarize();
+            assertEquals("true,true,true,true,true,", i.fire());
+        }
+        System.out.println("\n excite -> excite -> excite");
+        {
+            Connections nextNext = new Connections();
+            Neuron nN = new Neuron("excite", null);
+            nextNext.add(nN);
+
+            Connections next = new Connections();
+            Neuron n = new Neuron("excite", nextNext);
+            next.add(n);
+
+            Neuron i = new Neuron("excite",next);
+            i.depolarize();
+            assertEquals("true,true,true,", i.fire());
+        }
+        System.out.println("\n excite -> inhibit -> excite");
+        {
+            Connections nextNext = new Connections();
+            Neuron nN = new Neuron("excite", null);
+            nextNext.add(nN);
+
+            Connections next = new Connections();
+            Neuron n = new Neuron("inhibit", nextNext);
+            next.add(n);
+
+            Neuron i = new Neuron("excite",next);
+            i.depolarize();
+            assertEquals("true,true,false,", i.fire());
         }
 
     }

@@ -99,8 +99,8 @@ public class Neuron {
                 for (int i=0;i< next.size();i++) {
                     if (next.get(i).potential >= -55.0) {
                         next.get(i).potential = -70.0;
-                        next.get(i).fire();
                     }
+                    next.get(i).fire();
                 }
             }
         }
