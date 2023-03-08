@@ -119,26 +119,26 @@ class RPETest {
 
     @Test
     void neuronFire() {
-//        // one neuron, below threshold
-//        {
-//            Neuron i = new Neuron("excite",null);
-//
-//            assertEquals(false, i.fire());
-//        }
-//        // excitatory neuron, above threshold
-//        {
-//            Neuron i = new Neuron("excite",null);
-//            i.depolarize();
-//
-//            assertEquals(true, i.fire());
-//        }
-//        // inhibitory neuron, above threshold
-//        {
-//            Neuron i = new Neuron("inhibit",null);
-//            i.depolarize();
-//
-//            assertEquals(true, i.fire());
-//        }
+        // one neuron, below threshold
+        {
+            Neuron i = new Neuron("excite",null);
+            Boolean[] values = new Boolean[]{false};
+            assertEquals(values, i.fire());
+        }
+        // excitatory neuron, above threshold
+        {
+            Neuron i = new Neuron("excite",null);
+            i.depolarize();
+
+            assertEquals(true, i.fire());
+        }
+        // inhibitory neuron, above threshold
+        {
+            Neuron i = new Neuron("inhibit",null);
+            i.depolarize();
+
+            assertEquals(true, i.fire());
+        }
         // excitatory neurons
         {
             Connections next = new Connections();
@@ -148,9 +148,18 @@ class RPETest {
             }
             Neuron i = new Neuron("excite",next);
             i.depolarize();
-            i.fire();
+            Boolean[] values = new Boolean[]{true,true,true,true,true,true,true,
+            true,true,true,true,true,true,true,true,true};
+            assertEquals(values, i.fire());
         }
 
+    }
+
+    @Test
+    void test1() {
+        int numb = 1;
+        String str = "h";
+        System.out.println(numb + str);
     }
 
 }

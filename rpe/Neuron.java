@@ -14,6 +14,9 @@ public class Neuron {
     /** Stores the membrane potential of a neuron in mV. Initialized at -70.0. */
     private double potential;
 
+    /** List for fire() method. Keeps track of the action potentials of neurons. */
+    private static Boolean[] propagate;
+
     /** Asserts class invariants.*/
     private void assertInv() {
         int i = 0;
@@ -26,7 +29,7 @@ public class Neuron {
         assert type.equals("excite") || type.equals("inhibit");
     }
 
-    /** Creates an instance of Neuron.
+    /** Creates an instance of Neuron. Membrane potential is set to -70.0 mV.
      @param type specifies the type of neuron; must be "excite" or "inhibit"
      @param next list of neurons this object is connected to
      */
@@ -34,6 +37,7 @@ public class Neuron {
         this.type = type;
         this.next = next;
         potential = -70.0;
+        propagate = (next != null) ? new Boolean[next.size() + 1] : new Boolean[1];
         assertInv();
     }
 
@@ -68,16 +72,14 @@ public class Neuron {
         }
     }
 
-    /** Allows the neuron to fire, returning true for each neuron that fires
-     * if the membrane potential has reached the threshold. Prints whether the neuron is
-     * depolarized or repolarized. <br><br>
+    /** Allows the neuron to fire, returning a Boolean array that is true for each neuron
+     * that fires if the membrane potential has reached the threshold. A false value represents
+     * neurons that have not fired. Prints whether the neuron is depolarized or repolarized.<br><br>
      *
-     * If the neuron is excitatory, it depolarizes the connected neurons in `next`,
+     * If the neuron is excitatory, fire() depolarizes the connected neurons in `next`,
      * propagating the action potential. <br>
      * If the neuron is inhibitory, it repolarizes the membrane potential of connected neurons. */
     public Boolean[] fire() {
-        Boolean[] propagate = new Boolean[next.size()+1];
-        System.out.println(this);
 
         if (potential < -55.0) {
             System.out.println("Repolarized at "+potential+" mV");
@@ -89,7 +91,6 @@ public class Neuron {
             if (type.equals("excite") && next != null) {
                 for (int i=0;i<next.size();i++) {
                     next.get(i).depolarize();
-                    System.out.println(next.get(i));
                     next.get(i).fire();
                 }
             }
@@ -111,11 +112,12 @@ public class Neuron {
      */
     private void addToPropagate(Boolean[] list, boolean value) {
         int pos = 0;
-        while (list[pos] != null) {
-            pos += 1;
+        if (list != null) {
+            while (list[pos] != null) {
+                pos += 1;
+            }
         }
         list[pos] = value;
-        System.out.println(list[pos]);
     }
 
 }
