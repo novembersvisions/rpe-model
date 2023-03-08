@@ -14,8 +14,8 @@ public class Neuron {
     /** Stores the membrane potential of a neuron in mV. Initialized at -70.0. */
     private double potential;
 
-    /** List for fire() method. Keeps track of the action potentials of neurons. */
-    private static Boolean[] propagate;
+    /** String for fire() method. Keeps track of the action potentials of neurons. */
+    private static String propagate;
 
     /** Asserts class invariants.*/
     private void assertInv() {
@@ -37,7 +37,7 @@ public class Neuron {
         this.type = type;
         this.next = next;
         potential = -70.0;
-        propagate = (next != null) ? new Boolean[next.size() + 1] : new Boolean[1];
+        propagate = "";
         assertInv();
     }
 
@@ -72,22 +72,23 @@ public class Neuron {
         }
     }
 
-    /** Allows the neuron to fire, returning a Boolean array that is true for each neuron
-     * that fires if the membrane potential has reached the threshold. A false value represents
-     * neurons that have not fired. Prints whether the neuron is depolarized or repolarized.<br><br>
+    /** Allows the neuron to fire, returning a string representation of a Boolean array that is
+     * true for each neuron that fires if the membrane potential has reached the threshold.
+     * A false value represents neurons that have not fired. Prints whether the neuron is
+     * depolarized or repolarized.<br><br>
      *
      * If the neuron is excitatory, fire() depolarizes the connected neurons in `next`,
      * propagating the action potential. <br>
      * If the neuron is inhibitory, it repolarizes the membrane potential of connected neurons. */
-    public Boolean[] fire() {
+    public String fire() {
 
         if (potential < -55.0) {
             System.out.println("Repolarized at "+potential+" mV");
-            addToPropagate(propagate,false);
+            propagate += "false,";
         }
         else {
             System.out.println("Depolarized at "+potential+" mV");
-            addToPropagate(propagate,true);
+            propagate += "true,";
             if (type.equals("excite") && next != null) {
                 for (int i=0;i<next.size();i++) {
                     next.get(i).depolarize();
@@ -103,21 +104,15 @@ public class Neuron {
                 }
             }
         }
-        return propagate;
+        return postProcess(propagate);
     }
 
-    /**
-     * Helper method for fire(). Searches for the first empty spot in the array
-     * and adds a boolean `value` to `list`.
-     */
-    private void addToPropagate(Boolean[] list, boolean value) {
-        int pos = 0;
-        if (list != null) {
-            while (list[pos] != null) {
-                pos += 1;
-            }
+    /** Helper method for fire(). Modifies the number of commas when the list is completed. */
+    private String postProcess(String values) {
+        if (next == null) {
+            return propagate.substring(0,values.length()-1);
         }
-        list[pos] = value;
+        return propagate;
     }
 
 }

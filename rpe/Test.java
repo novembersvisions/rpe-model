@@ -122,22 +122,21 @@ class RPETest {
         // one neuron, below threshold
         {
             Neuron i = new Neuron("excite",null);
-            Boolean[] values = new Boolean[]{false};
-            assertEquals(values, i.fire());
+            assertEquals("false", i.fire());
         }
         // excitatory neuron, above threshold
         {
             Neuron i = new Neuron("excite",null);
             i.depolarize();
 
-            assertEquals(true, i.fire());
+            assertEquals("true", i.fire());
         }
         // inhibitory neuron, above threshold
         {
             Neuron i = new Neuron("inhibit",null);
             i.depolarize();
 
-            assertEquals(true, i.fire());
+            assertEquals("true", i.fire());
         }
         // excitatory neurons
         {
@@ -148,9 +147,8 @@ class RPETest {
             }
             Neuron i = new Neuron("excite",next);
             i.depolarize();
-            Boolean[] values = new Boolean[]{true,true,true,true,true,true,true,
-            true,true,true,true,true,true,true,true,true};
-            assertEquals(values, i.fire());
+            assertEquals("true,true,true,true,true,true,true,"
+                    + "true,true,true,true,true,true,true,true,true,", i.fire());
         }
 
     }
