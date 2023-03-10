@@ -3,6 +3,7 @@ package rpe;
 import java.util.ArrayList;
 import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 class RPETest {
@@ -206,14 +207,20 @@ class RPETest {
             i.depolarize();
             assertEquals("true,false,true,", i.fire());
         }
+        System.out.println("\n no initial action potential");
+        {
+            Connections nextNext = new Connections();
+            Neuron nN = new Neuron("excite", null);
+            nextNext.add(nN);
 
-    }
+            Connections next = new Connections();
+            Neuron n = new Neuron("inhibit", nextNext);
+            next.add(n);
 
-    @Test
-    void test1() {
-        int numb = 1;
-        String str = "h";
-        System.out.println(numb + str);
+            Neuron i = new Neuron("excite",next);
+            assertEquals("false,", i.fire());
+        }
+
     }
 
 }

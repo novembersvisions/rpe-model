@@ -2,7 +2,7 @@ package rpe;
 import java.util.ArrayList;
 import java.util.List;
 
-/** A network of neurons, implemented as a linked list. 
+/** A network of neurons, implemented as a tree data structure.
  * Invariant: no neuron in the network can be null */
 public class Network<Neuron> {
 
