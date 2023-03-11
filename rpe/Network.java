@@ -1,28 +1,31 @@
 package rpe;
-import java.util.ArrayList;
-import java.util.List;
 
-/** A network of neurons, implemented as a tree data structure.
- * Invariant: no neuron in the network can be null */
-public class Network<Neuron> {
+/** A network of neurons, implemented as a tree data structure. */
+public class Network {
 
     /** The first element of linked neurons in the network.
-     * Invariant: no neuron can point to `first` in its `next` field */
-    Neuron first;
-
-    /** The last element of linked neurons in the network.
-     * Invariant: the `next` field of this neuron must be null */
-    Neuron last;
+     * Invariant: no neuron can point to `root` in its `next` field */
+    private Neuron root;
 
     /** Number of neurons in the network.
      * Invariant: equals the number of unique neurons starting at null
      */
     public int size;
 
-    /** List of unique neurons in the network.
-     * Invariant: each element must be unique; each element in the list must equal
-     * a corresponding element in the network, and vice versa.
-     */
-    public List<Neuron> unique = new ArrayList<Neuron>();
+    /** Asserts class invariant */
+    private void assertInv() {
+    }
+
+    /** Constructs an empty tree */
+    public Network() {
+        root = null;
+        size = 0;
+    }
+
+    /** Converts generic tree to binary tree, returning a copy of the Network with at most
+     * 2 connections for each Neuron */
+    Network genericToBinary() {
+        return new Network();
+    }
 
 }

@@ -55,13 +55,13 @@ public class Neuron {
         return type;
     }
 
-    /**
-     * Calculates membrane potential in mV using the Goldman–Hodgkin–Katz equation.
-     * Modifies the value of field `potential`.
-     */
-    public void setPotential() {
-
-    }
+//    /**
+//     * Calculates membrane potential in mV using the Goldman–Hodgkin–Katz equation.
+//     * Modifies the value of field `potential`.
+//     */
+//    public void setPotential() {
+//
+//    }
 
     /**
      * If `potential` is less than -55.0 mV, it is set to -55.0, the threshold value.
